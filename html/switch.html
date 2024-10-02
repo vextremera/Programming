@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es" id="switch">
+    <head>
+        <title>Exercicis Bloc 1</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="../style.css" rel="stylesheet">
+        <script defer src="../scripts/switch.js"></script>
+    </head>
+    <body>
+        <div id="todo"></div>
+        <div id="all">
+            <h1 id="referencia-texto">Quin exercici vols fer?</h1>
+            <p id="text">Enunciat llarg</p>
+            <div id="text-back"></div>
+            <input type="text" id="temp" class="input-text" placeholder="Temperatura... (25-45)">
+            <div id="text-back2"></div>
+            <select id="tos" class="input-text2" placeholder="Tos (No, Seca, Expectorant)">
+                <option value="none">Selecciona...</option>
+                <option value="NO">NO</option>
+                <option value="SECA">SECA</option>
+                <option value="EXPECTORANT">EXPECTORANT</option>
+            </select>
+            <div id="text-back3"></div>
+            <input type="text" id="pessio" class="input-text3" placeholder="Pressio... (80-180)">
+            </br>
+            <div id="text-back4"></div>
+            <label type="text" id="result" class="resposta">Categoria???</label>
+            <div id="buttons">
+                <button id="accept-button" class="button" readonly onclick="categoria()"></button>
+                <button id="reject-button" class="button" readonly></button>
+            </div>
+            </div>
+    </body>
+</html>
