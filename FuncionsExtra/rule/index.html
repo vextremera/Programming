@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Roulette Layout</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Roulette</title>
+    <script defer src="script.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
@@ -24,9 +27,15 @@
             border-radius: 10px;
             background-color: rgb(3, 159, 3);
         }
+
         .roulette div {
             min-width: 80px;
             font-size: 25px;
+            border-radius: 5px;
+        }
+
+        .roulette div:hover {
+            cursor: pointer;
         }
 
         .numbers {
@@ -119,9 +128,46 @@
         .numbers.zero {
             grid-row: span 3;
         }
+
+        .chips {
+            width: 60vw;
+            height: 30vh;
+            display: flex;
+            flex-flow: row;
+            justify-content: center;
+            align-items: center;
+            margin: 0 20vw;
+        }
+
+        .chips div {
+            position: relative;
+            margin: 10px;
+            background-color: lightgray;
+            padding: 60px;
+            height: 10px;
+            width: 10px;
+            border-radius: 100%;
+        }
+
+        .chips div:hover {
+            cursor: pointer;
+        }
     </style>
 </head>
+
 <body>
+    <div class="chips">
+        <div id="chip-1">1</div>
+        <div id="chip-5">5</div>
+        <div id="chip-10">10</div>
+        <div id="chip-20">20</div>
+        <div id="chip-50">50</div>
+        <div id="chip-100">100</div>
+        <div id="chip-500">500</div>
+        <div id="chip-1000">1000</div>
+        <div id="chip-5000">5000</div>
+    </div>
+
     <div class="roulette">
         <!-- Numbers -->
         <div class="numbers green zero">0</div>
@@ -137,7 +183,7 @@
         <div class="numbers black">30</div>
         <div class="numbers red">33</div>
         <div class="numbers black">36</div>
-        <div class="bet bet-2-to-1">2/1</div>
+        <div id="lineBet-1" class="bet bet-2-to-1">2/1</div>
 
         <div class="numbers black">2</div>
         <div class="numbers red">5</div>
@@ -151,7 +197,7 @@
         <div class="numbers red">29</div>
         <div class="numbers black">32</div>
         <div class="numbers red">35</div>
-        <div class="bet bet-2-to-1">2/1</div>
+        <div id="lineBet-2" class="bet bet-2-to-1">2/1</div>
 
         <div class="numbers red">1</div>
         <div class="numbers black">4</div>
@@ -165,24 +211,25 @@
         <div class="numbers black">28</div>
         <div class="numbers red">31</div>
         <div class="numbers black">34</div>
-        <div class="bet bet-2-to-1">2/1</div>
+        <div id="lineBet-3" class="bet bet-2-to-1">2/1</div>
 
         <div class="space"></div>
 
         <!-- Special bets -->
-        <div class="docena-bet">1st 12</div>
-        <div class="docena-bet">2nd 12</div>
-        <div class="docena-bet">3rd 12</div>
-        
+        <div id="thirdBet-1" class="docena-bet">1st 12</div>
+        <div id="thirdBet-2" class="docena-bet">2nd 12</div>
+        <div id="thirdBet-3" class="docena-bet">3rd 12</div>
+
         <div class="space"></div>
 
         <!-- Odds/Evens and High/Low -->
-        <div class="special-bet">Odd</div>
-        <div class="special-bet">Even</div>
-        <div class="color-bet red">Red</div>
-        <div class="color-bet black">Black</div>
-        <div class="special-bet">1-18</div>
-        <div class="special-bet">19-36</div>
+        <div id="odd" class="special-bet">Odd</div>
+        <div id="even" class="special-bet">Even</div>
+        <div id="red" class="color-bet red">Red</div>
+        <div id="black" class="color-bet black">Black</div>
+        <div id="half-1" class="special-bet">1-18</div>
+        <div id="half-2" class="special-bet">19-36</div>
     </div>
 </body>
+
 </html>
