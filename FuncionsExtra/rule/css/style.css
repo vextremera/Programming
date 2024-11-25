@@ -1,0 +1,142 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f4;
+}
+
+.table-bet {
+    display: grid;
+    grid-template-columns: repeat(14, 1fr);
+    grid-auto-rows: 80px;
+    gap: 3.4px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: rgb(3, 159, 3);
+}
+
+.table-bet div {
+    min-width: 80px;
+    font-size: 25px;
+    border-radius: 5px;
+}
+
+.table-bet div:hover {
+    cursor: pointer;
+}
+
+.numbers {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    /* border-radius: 5px; */
+}
+
+.numbers.red {
+    background-color: red;
+}
+
+.numbers.black {
+    background-color: black;
+}
+
+.numbers.green {
+    background-color: darkgreen;
+}
+
+.bet {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: darkgreen;
+    color: white;
+    font-weight: bold;
+    /* border: 2px solid #000; */
+    /* border-radius: 5px; */
+}
+
+.bet-2-to-1 {
+    grid-row: span 1;
+}
+
+.docena-bet {
+    grid-column: span 4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: darkgreen;
+    color: white;
+    font-weight: bold;
+    /* border: 2px solid #000; */
+    /* border-radius: 5px; */
+}
+
+.special-bet {
+    grid-column: span 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: darkgreen;
+    color: white;
+    font-weight: bold;
+    /* border: 2px solid #000; */
+    /* border-radius: 5px; */
+}
+
+.space {
+    grid-row: span 2;
+}
+
+.color-bet {
+    grid-column: span 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    color: black;
+    font-weight: bold;
+    border: 2px solid #000;
+    /* border-radius: 5px; */
+}
+
+.color-bet.red {
+    background-color: red;
+    color: white;
+}
+
+.color-bet.black {
+    background-color: black;
+    color: white;
+}
+
+.numbers.zero {
+    grid-row: span 3;
+}
+
+.chips {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-content: center;
+    align-items: center;
+    scale: 0.7;
+    position: absolute;
+    translate: 90% -30%;
+}
+
+.chips div {
+    height: 180px;
+    width: 180px;
+    /* background-color: blue; */
+    background-position: center center;
+}
+
+.chips div:hover {
+    cursor: crosshair;
+}

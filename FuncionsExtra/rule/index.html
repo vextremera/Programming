@@ -5,212 +5,74 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Roulette</title>
-    <script defer src="script.js"></script>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f4f4f4;
-        }
-
-        .roulette {
-            display: grid;
-            grid-template-columns: repeat(14, 1fr);
-            grid-auto-rows: 80px;
-            gap: 3.4px;
-            padding: 20px;
-            border-radius: 10px;
-            background-color: rgb(3, 159, 3);
-        }
-
-        .roulette div {
-            min-width: 80px;
-            font-size: 25px;
-            border-radius: 5px;
-        }
-
-        .roulette div:hover {
-            cursor: pointer;
-        }
-
-        .numbers {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 18px;
-            font-weight: bold;
-            color: white;
-            /* border-radius: 5px; */
-        }
-
-        .numbers.red {
-            background-color: red;
-        }
-
-        .numbers.black {
-            background-color: black;
-        }
-
-        .numbers.green {
-            background-color: darkgreen;
-        }
-
-        .bet {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: darkgreen;
-            color: white;
-            font-weight: bold;
-            /* border: 2px solid #000; */
-            /* border-radius: 5px; */
-        }
-
-        .bet-2-to-1 {
-            grid-row: span 1;
-        }
-
-        .docena-bet {
-            grid-column: span 4;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: darkgreen;
-            color: white;
-            font-weight: bold;
-            /* border: 2px solid #000; */
-            /* border-radius: 5px; */
-        }
-
-        .special-bet {
-            grid-column: span 2;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: darkgreen;
-            color: white;
-            font-weight: bold;
-            /* border: 2px solid #000; */
-            /* border-radius: 5px; */
-        }
-
-        .space {
-            grid-row: span 2;
-        }
-
-        .color-bet {
-            grid-column: span 2;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: white;
-            color: black;
-            font-weight: bold;
-            border: 2px solid #000;
-            /* border-radius: 5px; */
-        }
-
-        .color-bet.red {
-            background-color: red;
-            color: white;
-        }
-
-        .color-bet.black {
-            background-color: black;
-            color: white;
-        }
-
-        .numbers.zero {
-            grid-row: span 3;
-        }
-
-        .chips {
-            width: 60vw;
-            height: 30vh;
-            display: flex;
-            flex-flow: row;
-            justify-content: center;
-            align-items: center;
-            margin: 0 20vw;
-        }
-
-        .chips div {
-            position: relative;
-            margin: 10px;
-            background-color: lightgray;
-            padding: 60px;
-            height: 10px;
-            width: 10px;
-            border-radius: 100%;
-        }
-
-        .chips div:hover {
-            cursor: pointer;
-        }
-    </style>
+    <script defer src="js/prueba.js"></script>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
     <div class="chips">
-        <div id="chip-1">1</div>
-        <div id="chip-5">5</div>
-        <div id="chip-10">10</div>
-        <div id="chip-20">20</div>
-        <div id="chip-50">50</div>
-        <div id="chip-100">100</div>
-        <div id="chip-500">500</div>
-        <div id="chip-1000">1000</div>
-        <div id="chip-5000">5000</div>
+        <!-- <img id="chip-1" src="img/chip-1.png" alt="chip-1">
+        <img id="chip-5" src="img/chip-5.png" alt="chip-5">
+        <img id="chip-10" src="img/chip-10.png" alt="chip-10">
+        <img id="chip-20" src="img/chip-20.png" alt="chip-20">
+        <img id="chip-25" src="img/chip-25.png" alt="chip-25">
+        <img id="chip-50" src="img/chip-50.png" alt="chip-50">
+        <img id="chip-100" src="img/chip-100.png" alt="chip-100">
+        <img id="chip-150" src="img/chip-150.png" alt="chip-150">
+        <img id="chip-200" src="img/chip-200.png" alt="chip-200"> -->
+        <div id="chip-1" src="img/chip-1.png" alt="chip-1" style="background-image: url(img/chip-1.png);"></div>
+        <div id="chip-5" src="img/chip-5.png" alt="chip-5" style="background-image: url(img/chip-5.png);"></div>
+        <div id="chip-10" src="img/chip-10.png" alt="chip-10" style="background-image: url(img/chip-10.png);"></div>
+        <div id="chip-20" src="img/chip-20.png" alt="chip-20" style="background-image: url(img/chip-20.png);"></div>
+        <div id="chip-25" src="img/chip-25.png" alt="chip-25" style="background-image: url(img/chip-25.png);"></div>
+        <div id="chip-50" src="img/chip-50.png" alt="chip-50" style="background-image: url(img/chip-50.png);"></div>
+        <div id="chip-100" src="img/chip-100.png" alt="chip-100" style="background-image: url(img/chip-100.png);"></div>
+        <div id="chip-150" src="img/chip-150.png" alt="chip-150" style="background-image: url(img/chip-150.png);"></div>
+        <div id="chip-200" src="img/chip-200.png" alt="chip-250" style="background-image: url(img/chip-200.png);"></div>
     </div>
-
-    <div class="roulette">
+    <div class="table-bet">
         <!-- Numbers -->
         <div class="numbers green zero">0</div>
         <div class="numbers red">3</div>
         <div class="numbers black">6</div>
         <div class="numbers red">9</div>
-        <div class="numbers black">12</div>
-        <div class="numbers red">15</div>
-        <div class="numbers black">18</div>
+        <div class="numbers red">12</div>
+        <div class="numbers black">15</div>
+        <div class="numbers red">18</div>
         <div class="numbers red">21</div>
         <div class="numbers black">24</div>
         <div class="numbers red">27</div>
-        <div class="numbers black">30</div>
-        <div class="numbers red">33</div>
-        <div class="numbers black">36</div>
+        <div class="numbers red">30</div>
+        <div class="numbers black">33</div>
+        <div class="numbers red">36</div>
         <div id="lineBet-1" class="bet bet-2-to-1">2/1</div>
 
         <div class="numbers black">2</div>
         <div class="numbers red">5</div>
         <div class="numbers black">8</div>
-        <div class="numbers red">11</div>
-        <div class="numbers black">14</div>
-        <div class="numbers red">17</div>
+        <div class="numbers black">11</div>
+        <div class="numbers red">14</div>
+        <div class="numbers black">17</div>
         <div class="numbers black">20</div>
         <div class="numbers red">23</div>
         <div class="numbers black">26</div>
-        <div class="numbers red">29</div>
-        <div class="numbers black">32</div>
-        <div class="numbers red">35</div>
+        <div class="numbers black">29</div>
+        <div class="numbers red">32</div>
+        <div class="numbers black">35</div>
         <div id="lineBet-2" class="bet bet-2-to-1">2/1</div>
 
         <div class="numbers red">1</div>
         <div class="numbers black">4</div>
         <div class="numbers red">7</div>
         <div class="numbers black">10</div>
-        <div class="numbers red">13</div>
-        <div class="numbers black">16</div>
+        <div class="numbers black">13</div>
+        <div class="numbers red">16</div>
         <div class="numbers red">19</div>
         <div class="numbers black">22</div>
         <div class="numbers red">25</div>
         <div class="numbers black">28</div>
-        <div class="numbers red">31</div>
-        <div class="numbers black">34</div>
+        <div class="numbers black">31</div>
+        <div class="numbers red">34</div>
         <div id="lineBet-3" class="bet bet-2-to-1">2/1</div>
 
         <div class="space"></div>
@@ -230,6 +92,7 @@
         <div id="half-1" class="special-bet">1-18</div>
         <div id="half-2" class="special-bet">19-36</div>
     </div>
+    <button id="calcular"></button>
 </body>
 
 </html>

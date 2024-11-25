@@ -1,7 +1,8 @@
 // Array con los fichas específicos
-const fichas = ["chip-1", "chip-5", "chip-10", "chip-20", "chip-50", "chip-100", "chip-500", "chip-1000", "chip-5000"];
+const fichas = ["chip-1", "chip-5", "chip-10", "chip-20", "chip-25", "chip-50", "chip-100", "chip-150", "chip-200"];
 let fichaSeleccionada = Number();
 
+let numerosBets = []
 
 const bets = [];
 const odd = [];
@@ -19,6 +20,7 @@ const lines = {
 };
 const lineBets = document.querySelectorAll('.bet-2-to-1');
 
+
 const thirds = {
     'thirdBet-1': ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
     'thirdBet-2': ['13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24'],
@@ -35,6 +37,8 @@ fichas.forEach(valor => {
             fichaSeleccionada = Number(valor);
             console.log(`Has hecho clic en el ficha con valor: ${fichaSeleccionada}`)
             console.log(`Tipo de 'valor': ${typeof fichaSeleccionada}`); // Siempre será "number" en el array
+
+            numerosBets.push(fichaSeleccionada); // * Añade el número a la lista de apuestas
         });
     }
     if (!ficha) {
@@ -82,6 +86,9 @@ lineBets.forEach(lineBet => {
             lineNumbers.forEach(number => {
                 if (!bets.includes(number)) {
                     bets.push(number);
+                    // * Añade el número a la lista de apuestas
+                    // numberBets.push('line'+whichLine);
+                    // console.log('numberBets ', numberBets)
                 }
             });
             console.log(`Línea seleccionada: ${whichLine}`);
