@@ -30,6 +30,31 @@ const thirdBets = document.querySelectorAll('.docena-bet');
 // Objeto para almacenar las apuestas
 const apuestas = {};
 
+const mostrarChipsBtn = document.getElementById('chips-button');
+const chipsMenu = document.getElementById('chipsMenuDiv');
+
+ocultarMenu(chipsMenu);
+
+
+mostrarChipsBtn.addEventListener('click', function () {
+    if (chipsMenu.style.display == "grid") {
+        ocultarMenu(chipsMenu);
+    }
+    else if (chipsMenu.style.display == "none") {
+        mostrarMenu(chipsMenu);
+        // console.log('Se ha llamado la funcion para mostrar el menu');
+    }
+});
+
+// Función para mostrar/ocultar menús
+function mostrarMenu(menu) {
+    menu.style.display = "grid";
+}
+
+function ocultarMenu(menu) {
+    menu.style.display = "none";
+}
+
 // Función para agregar o actualizar apuestas
 function agregarApuesta(casilla, valorFicha) {
     const totalApuesta = Object.values(apuestas).reduce((sum, valor) => sum + valor, 0);
@@ -92,6 +117,8 @@ fichas.forEach(valor => {
                 return;
             }
             fichaSeleccionada = valorFicha;
+            ocultarMenu(chipsMenu); //ocultamos el menu
+            console.log("se ha ejecutado la funcion para ocultar el menu");
             console.log(`Has seleccionado la ficha de valor: ${fichaSeleccionada}`);
         });
     }
