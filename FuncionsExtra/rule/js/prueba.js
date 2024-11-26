@@ -33,27 +33,60 @@ const apuestas = {};
 const mostrarChipsBtn = document.getElementById('chips-button');
 const chipsMenu = document.getElementById('chipsMenuDiv');
 
-ocultarMenu(chipsMenu);
+document.addEventListener('DOMContentLoaded', () => {
+    const chipsMenu = document.querySelector('.chips');
+    const chipsButton = document.querySelector('#chips-button');
+    const fichas = document.querySelectorAll('.ficha'); // Asegúrate de que tus fichas tienen esta clase.
 
+    // Función para cerrar el menú de chips
+    function closeChipsMenu() {
+        if (chipsMenu.classList.contains('active')) {
+            chipsMenu.classList.remove('active');
+            chipsMenu.classList.add('hidden');
 
-mostrarChipsBtn.addEventListener('click', function () {
-    if (chipsMenu.style.display == "grid") {
-        ocultarMenu(chipsMenu);
+            // Espera que la animación termine antes de ocultarlo
+            setTimeout(() => {
+                chipsMenu.style.display = 'none';
+                chipsMenu.classList.remove('hidden');
+            }, 300); // Duración de la animación de salida
+        }
     }
-    else if (chipsMenu.style.display == "none") {
-        mostrarMenu(chipsMenu);
-        // console.log('Se ha llamado la funcion para mostrar el menu');
-    }
+
+    // Mostrar el menú al hacer clic en el botón
+    chipsButton.addEventListener('click', () => {
+        if (chipsMenu.classList.contains('active')) {
+            closeChipsMenu(); // Cerrar si ya está activo
+        } else {
+            chipsMenu.style.display = 'grid';
+            requestAnimationFrame(() => {
+                chipsMenu.classList.add('active');
+            });
+        }x
+    });
+
+    // Asignar eventos a las fichas
+    fichas.forEach(ficha => {
+        ficha.addEventListener('click', (event) => {
+            // Si la ficha está seleccionada, no cerrar el menú
+            if (fichaSeleccionada) {
+                fichaSeleccionada = parseInt(ficha.id.split('-')[1], 10); // Asume que los IDs de las fichas son chip-{valor}
+                console.log(`Has seleccionado la ficha de valor: ${fichaSeleccionada}`);
+                return;
+            }
+            
+            // Cerrar el menú si clicas en cualquier parte que no sea una ficha
+            closeChipsMenu();
+        });
+    });
+
+    // También puedes agregar un clic fuera del menú para cerrarlo (opcional)
+    document.addEventListener('click', (event) => {
+        // Cierra el menú si haces clic fuera de él o el botón de chips
+        if (!chipsMenu.contains(event.target) && !chipsButton.contains(event.target)) {
+            closeChipsMenu();
+        }
+    });
 });
-
-// Función para mostrar/ocultar menús
-function mostrarMenu(menu) {
-    menu.style.display = "grid";
-}
-
-function ocultarMenu(menu) {
-    menu.style.display = "none";
-}
 
 // Función para agregar o actualizar apuestas
 function agregarApuesta(casilla, valorFicha) {
@@ -117,7 +150,6 @@ fichas.forEach(valor => {
                 return;
             }
             fichaSeleccionada = valorFicha;
-            ocultarMenu(chipsMenu); //ocultamos el menu
             console.log("se ha ejecutado la funcion para ocultar el menu");
             console.log(`Has seleccionado la ficha de valor: ${fichaSeleccionada}`);
         });

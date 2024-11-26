@@ -162,13 +162,27 @@ body {
     justify-content: center;
     align-items: center;
     padding: 40px;
-    scale: 0.9;
+    transform: scale(0.7);
+    opacity: 0;
     position: absolute;
     background-color: white;
     border-radius: 20px;    
     border: 8px solid rgb(63, 63, 63);
-    box-shadow: -3px 5px 10px rgba(0, 0, 0, 0.8) inset;
+    box-shadow: -3px 5px 10px rgba(0, 0, 0, 0.2) inset;
     z-index: 30;
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out, visibility 0.3s; /* Transiciones suaves */
+}
+
+.chips.active {
+    display: grid; /* Asegúrate de que el menú sea visible */
+    opacity: 1;
+    transform: scale(0.9); /* Tamaño original */
+}
+
+.chips.hidden {
+    /* Animación de salida */
+    opacity: 0;
+    transform: scale(0.7); /* Reducción de escala */
 }
 
 .chips div {
