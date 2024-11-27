@@ -22,6 +22,10 @@ const thirds = {
     'thirdBet-3': ['25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36']
 };
 
+// Botones de color rojo o negro
+const redButton = document.getElementById('red-button');
+const blackButton = document.getElementById('black-button');
+
 // Selección de elementos del DOM
 const numberBets = document.querySelectorAll('.numbers');
 const lineBets = document.querySelectorAll('.bet-2-to-1');
@@ -162,6 +166,7 @@ numberBets.forEach(numberBet => {
         const casilla = numberBet.textContent.trim();
         if (fichaSeleccionada) {
             agregarApuesta(casilla, fichaSeleccionada);
+            colocarFicha(casilla, fichaSeleccionada); // ! COLOCAR FICHA ENCIMA
         } else {
             console.warn("No se ha seleccionado una ficha.");
         }
@@ -176,6 +181,7 @@ lineBets.forEach(lineBet => {
         if (lineNumbers && fichaSeleccionada) {
             lineNumbers.forEach(() => {
                 agregarApuesta(`lineBet-${whichLine}`, fichaSeleccionada);
+                colocarFicha(whichLine, fichaSeleccionada); //! COLOCAR FICHA ENCIMA
             });
         }
     });
@@ -189,10 +195,14 @@ thirdBets.forEach(thirdBet => {
         if (thirdNumbers && fichaSeleccionada) {
             thirdNumbers.forEach(() => {
                 agregarApuesta(`thirdBet-${whichThird}`, fichaSeleccionada);
+                colocarFicha(whichThird, fichaSeleccionada); //! COLOCAR FICHA ENCIMA
             });
         }
     });
 });
+
+
+
 
 // Evento para calcular el resultado
 document.querySelector('#calcular').addEventListener('click', function () {
@@ -216,4 +226,107 @@ document.querySelector('#calcular').addEventListener('click', function () {
     console.log(`Premio total: ${premio}`);
     console.log(`Pérdida total: ${perdida}`);
     console.log(`Balance final: ${balance}`);
+});
+
+//Funcion colocar ficha encima de la casilla
+// Actualización de la función colocarFicha
+function colocarFicha(casilla, valorFicha) {
+    let divApuesta;
+    
+    // Selección según casilla específica
+    if (casilla === 'red' || casilla === 'black') {
+        divApuesta = document.getElementById(`${casilla}-button`);
+    } else if (casilla === 'even' || casilla === 'odd') {
+        divApuesta = document.getElementById(casilla);
+    } else if (casilla === 'half-1' || casilla === 'half-2') {
+        divApuesta = document.getElementById(casilla);
+    } else if (casilla.startsWith('thirdBet-') || casilla.startsWith('lineBet-')) {
+        divApuesta = document.getElementById(casilla); 
+    } else {
+        divApuesta = Array.from(document.querySelectorAll('.numbers'))
+            .find(div => div.textContent.trim() === casilla);
+    }
+
+    if (!divApuesta) {
+        console.warn(`No se encontró el div para la casilla: ${casilla}`);
+        return;
+    }
+
+    // Eliminar cualquier ficha existente en esa casilla
+    const fichaExistente = divApuesta.querySelector('.ficha-apuesta');
+    if (fichaExistente) fichaExistente.remove();
+
+    // Crear y posicionar la imagen de la ficha
+    const imgFicha = document.createElement('img');
+    imgFicha.src = `img/chip-${valorFicha}.png`;
+    imgFicha.alt = `chip-${valorFicha}`;
+    imgFicha.classList.add('ficha-apuesta');
+
+    // Estilos para la imagen
+    imgFicha.style.position = 'absolute';
+    imgFicha.style.width = '50px';  // Ajusta el tamaño según necesidad
+    imgFicha.style.height = '50px';
+    imgFicha.style.zIndex = '40';
+    imgFicha.style.pointerEvents = 'none';
+
+    // Asegurarse de que el contenedor tiene `position: relative`
+    divApuesta.style.position = 'relative';
+    divApuesta.appendChild(imgFicha);
+}
+
+// Eventos adicionales para half-1 y half-2
+document.getElementById('half-1').addEventListener('click', function () {
+    if (fichaSeleccionada) {
+        agregarApuesta('half-1', fichaSeleccionada);
+        colocarFicha('half-1', fichaSeleccionada); // Coloca la ficha
+    } else {
+        console.warn("No se ha seleccionado una ficha.");
+    }
+});
+
+document.getElementById('half-2').addEventListener('click', function () {
+    if (fichaSeleccionada) {
+        agregarApuesta('half-2', fichaSeleccionada);
+        colocarFicha('half-2', fichaSeleccionada); // Coloca la ficha
+    } else {
+        console.warn("No se ha seleccionado una ficha.");
+    }
+});
+
+// Corrección para los eventos red y black
+redButton.addEventListener('click', function () {
+    if (fichaSeleccionada) {
+        agregarApuesta('red', fichaSeleccionada);
+        colocarFicha('red', fichaSeleccionada);  // Coloca la ficha
+    } else {
+        console.warn("No se ha seleccionado una ficha.");
+    }
+});
+
+blackButton.addEventListener('click', function () {
+    if (fichaSeleccionada) {
+        agregarApuesta('black', fichaSeleccionada);
+        colocarFicha('black', fichaSeleccionada);  // Coloca la ficha
+    } else {
+        console.warn("No se ha seleccionado una ficha.");
+    }
+});
+
+// Eventos para odd y even
+document.getElementById('odd').addEventListener('click', function () {
+    if (fichaSeleccionada) {
+        agregarApuesta('odd', fichaSeleccionada);
+        colocarFicha('odd', fichaSeleccionada);  // Coloca la ficha
+    } else {
+        console.warn("No se ha seleccionado una ficha.");
+    }
+});
+
+document.getElementById('even').addEventListener('click', function () {
+    if (fichaSeleccionada) {
+        agregarApuesta('even', fichaSeleccionada);
+        colocarFicha('even', fichaSeleccionada);  // Coloca la ficha
+    } else {
+        console.warn("No se ha seleccionado una ficha.");
+    }
 });
