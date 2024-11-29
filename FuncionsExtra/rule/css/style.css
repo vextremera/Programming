@@ -1,3 +1,5 @@
+@import url('https://fonts.cdnfonts.com/css/digital-numbers');
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -9,17 +11,17 @@ body {
     background-color: #f4f4f4;
 }
 
-.chip-btn {
+.buttons {
     /* background-color: blue; */
     height: 70px;
     width: 100%;
     margin: 0 9px -15px 0;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: flex-end;
 }
 
-#chips-button {
+.buttons button {
     height: 100%;
     width: 200px;
     border-radius: 15px;
@@ -29,9 +31,7 @@ body {
     cursor: pointer;
     z-index: 10;
 }
-
-#chips-button p {
-    /* text */
+.buttons button p {
     color: white;
     font-size: 20px;
     font-weight: 700;
@@ -40,6 +40,30 @@ body {
     text-transform: uppercase;
     text-align: center;
     margin-top: 0px;
+}
+
+#balance {
+    position: relative;
+    font-family: 'Digital Numbers', sans-serif;
+    background-color: rgb(47, 47, 47);
+    border-radius: 2px;
+    height: 65%;
+    width: 180px;
+    margin: 6px;
+    outline: 6px solid rgb(6, 6, 6);
+    transform: translateY(-13px);
+    margin-right: auto;
+}
+
+#balance p {
+    color: rgb(255, 125, 125);
+    text-shadow: 0 0 10px red;
+    font-size: 30px;
+    font-weight: 500;
+}
+
+.buttons button:nth-child(2), .buttons button:nth-child(3), .buttons button:nth-child(4){
+    display: none;
 }
 
 .table-bet {
@@ -125,8 +149,27 @@ body {
     /* border-radius: 5px; */
 }
 
-.space {
+.big-space {
     grid-row: span 2;
+}
+
+#wrong, #erase {
+    background-image: url(../img/wrong.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    transform: scale(0.7);
+    transition: ease .5s;
+    cursor: no-drop;
+}
+
+#erase {
+    background-image: url(../img/restart.png);
+    cursor: wait;
+}
+
+#wrong:hover, #erase:hover {
+    transform: scale(0.8);
 }
 
 .color-bet {

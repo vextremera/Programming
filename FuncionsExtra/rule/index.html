@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Roulette</title>
-    <script defer src="js/arreglo.js"></script>
+    <script defer src="js/script.js"></script>
     <link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -22,7 +22,12 @@
         <div id="chip-200" src="img/chip-200.png" alt="chip-250" style="background-image: url(img/chip-200.png);"></div>
     </div>
 <div style="display: block;">
-    <div class="chip-btn">
+    <div class="buttons">
+        <button id="balance"><p id="balanceNumber">00000</p></button>
+        <button id=""><p></p></button>
+        <button id=""><p></p></button>
+        <button id=""><p></p></button> 
+        <button id="calcular-button"><p>calcular</p></button>
         <button id="chips-button"><p>chips</p></button>
     </div>
 
@@ -71,14 +76,14 @@
         <div class="numbers red">34</div>
         <div id="lineBet-3" class="bet bet-2-to-1">2/1</div>
 
-        <div class="space"></div>
+        <div class="big-space"></div>
 
         <!-- Special bets -->
         <div id="thirdBet-1" class="docena-bet">1st 12</div>
         <div id="thirdBet-2" class="docena-bet">2nd 12</div>
         <div id="thirdBet-3" class="docena-bet">3rd 12</div>
 
-        <div class="space"></div>
+        <div id="wrong" class="space"></div>
 
         <!-- Odds/Evens and High/Low -->
         <div id="odd" class="special-bet">Odd</div>
@@ -87,6 +92,9 @@
         <div id="black-button" class="color-bet black">Black</div>
         <div id="half-1" class="special-bet">1-18</div>
         <div id="half-2" class="special-bet">19-36</div>
+
+        <div id="erase" class="space"></div>
+
     </div>
 </div>
     <button id="calcular"></button>
