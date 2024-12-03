@@ -4,10 +4,9 @@ const fichas = ["chip-1", "chip-5", "chip-10", "chip-20", "chip-25", "chip-50", 
 let fichaSeleccionada = 0;
 
 const balanceElement = document.getElementById("balanceNumber");
-let balanceInicial = 1000;
+let balance = 0;
 
-// let bets = [], even = [], odd = [], red = [], black = [];
-let apuestas = {};
+const apuestas = {};
 
 const lines = {
     'lineBet-1': ['3', '6', '9', '12', '15', '18', '21', '24', '27', '30', '33', '36'],
@@ -73,43 +72,37 @@ function colocarFicha(casilla, valorFicha) {
         return;
     }
 
-    // ? Eliminar cualquier ficha existente en esa casilla
     const fichaExistente = divApuesta.querySelector('.ficha-apuesta');
-    if (fichaExistente) fichaExistente.remove();
 
-    // ? Crear y posicionar la imagen de la ficha
-    const imgFicha = document.createElement('img');
-    imgFicha.src = `img/chip-${valorFicha}.png`;
-    imgFicha.alt = `chip-${valorFicha}`;
-    imgFicha.classList.add('ficha-apuesta');
+    if (fichaExistente || !fichaExistente) {
+        if (fichaExistente) { fichaExistente.remove(); console.log("fichaExistente"); }
+        // ? Crear y posicionar la imagen de la ficha
+        const imgFicha = document.createElement('img');
+        imgFicha.src = `img/chip-${valorFicha}.png`;
+        imgFicha.alt = `chip-${valorFicha}`;
+        imgFicha.classList.add('ficha-apuesta');
 
-    // ? Estilos para la imagen
-    imgFicha.style.position = 'absolute';
-    imgFicha.style.width = '100px';  // + Ajusta el tamaño según necesidad
-    imgFicha.style.height = '100px';
-    imgFicha.style.zIndex = '40';
-    imgFicha.style.pointerEvents = 'none';
+        // ? Estilos para la imagen
+        imgFicha.style.position = 'absolute';
+        imgFicha.style.width = '100px';  // + Ajusta el tamaño según necesidad
+        imgFicha.style.height = '100px';
+        imgFicha.style.zIndex = '40';
+        imgFicha.style.pointerEvents = 'none';
 
-    // ? Asegurarse de que el contenedor tiene `position: relative`
-    divApuesta.style.position = 'relative';
-    divApuesta.appendChild(imgFicha);
+        // ? Asegurarse de que el contenedor tiene `position: relative`
+        divApuesta.style.position = 'relative';
+        divApuesta.appendChild(imgFicha);
+    }
+    else console.error('pero que guea');
 }
 
 // * FUNCION PARA AGREGAR APUESTAS A LAS CASILLAS CONCRETAS
 function agregarApuesta(casilla, valorFicha) {
     const totalApuesta = Object.values(apuestas).reduce((sum, valor) => sum + valor, 0);
-
-    if (fichaSeleccionada === 0) {
-        console.warn("No has seleccionado una ficha.");
-        return; // Salir si no se ha seleccionado una ficha
-    }
-
-    if ((totalApuesta + valorFicha) > balanceInicial) {
+    if (totalApuesta + valorFicha > balance) {
         console.warn("No tienes suficiente balance para esta apuesta.");
-        return; // Salir si no hay suficiente balance
+        return;
     }
-
-    console.warn(`Total apuesta: ${totalApuesta}, Valor ficha: ${valorFicha}, Balance: ${balance}`);
 
     // ? Resta el valor de la ficha del balance
     balance -= valorFicha;
@@ -120,7 +113,6 @@ function agregarApuesta(casilla, valorFicha) {
     } else {
         apuestas[casilla] = valorFicha;
     }
-    console.log("Apuestas actuales: ", apuestas);
     console.log(`Apuesta en ${casilla}: ${apuestas[casilla]}`);
 }
 
@@ -159,28 +151,8 @@ function calcularPerdidaTotal() {
 // * FUNCION DE ACTUALIZAR EL BALANCE
 function actualizarBalance() {
     balanceElement.textContent = `${balance}`;
-    console.info('BALANCE ACTUAL:' + balance);
 }
 
-function eliminarApuesta(casilla) {
-    const divApuesta = Array.from(document.querySelectorAll('.numbers, .bet, .special-bet, .color-bet'))
-        .find(div => div.textContent.trim() === casilla || div.id === casilla);
-
-    if (divApuesta) {
-        const ficha = divApuesta.querySelector('.ficha-apuesta');
-        if (ficha) ficha.remove(); // Elimina la ficha visual
-
-        if (apuestas[casilla]) {
-            balance += apuestas[casilla]; // Devuelve el dinero al balance
-            delete apuestas[casilla]; // Elimina la apuesta registrada
-            actualizarBalance();
-        }
-        console.log(`Apuesta en ${casilla} eliminada.`);
-    }
-
-    // Desactiva el modo borrar después de tocar varias casillas
-    modoBorrar = false;
-}
 
 function gestionarCasilla(casillaId) {
     if (modoBorrar) {
@@ -191,22 +163,16 @@ function gestionarCasilla(casillaId) {
         }
 
         // Buscar y eliminar la ficha en el DOM
-        let casilla = document.getElementById(casillaId);
-        
-        if (!casilla) {
-            // Si no se encuentra por ID, buscar por clases
-            casilla = Array.from(document.querySelectorAll('.numbers, .bet, .special-bet, .color-bet'))
-                .find(div => div.textContent.trim() === casillaId || div.id === casillaId);
-        }
-
+        const casilla = document.getElementById(casillaId) || document.querySelector(`.numbers[data-id='${casillaId}']`);
         if (casilla) {
+            // Seleccionamos el elemento que contiene la ficha
             const ficha = casilla.querySelector('.ficha-apuesta');
             if (ficha) {
-                ficha.remove();
-                console.info("Ficha eliminada de la casilla:", casillaId);
+                ficha.remove(); // Eliminamos la ficha del DOM
+                console.log(`Ficha eliminada de la casilla ${casillaId}`);
+            } else {
+                console.log(`No se encontró ninguna ficha en la casilla ${casillaId}`);
             }
-        } else {
-            console.error("No se encontró la casilla para eliminar:", casillaId);
         }
 
         actualizarBalance(); // Actualizar el balance después de eliminar
@@ -217,36 +183,6 @@ function gestionarCasilla(casillaId) {
     } else {
         console.warn("No se ha seleccionado una ficha.");
     }
-}
-
-// Función para borrar todas las apuestas y fichas visuales, devolviendo el dinero de cada apuesta
-function borrarTodasLasApuestas() {
-    // Iterar sobre las apuestas almacenadas y devolver el dinero apostado
-    for (let casilla in apuestas) {
-        if (apuestas.hasOwnProperty(casilla)) {
-            let montoApuesta = apuestas[casilla]; // Obtener el monto de la apuesta en esa casilla
-            balance += montoApuesta; // Devolver el monto al balance
-            console.log(`Apuesta eliminada de ${casilla}: ${montoApuesta}, nuevo balance: ${balance}`);
-        }
-    }
-
-    // Eliminar las imágenes de fichas en todas las casillas
-    const todasLasCasillas = document.querySelectorAll('.numbers, .bet, .special-bet, .color-bet, .docena-bet');
-    todasLasCasillas.forEach(casilla => {
-        const ficha = casilla.querySelector('.ficha-apuesta');
-        if (ficha) {
-            console.log(`Eliminando ficha en casilla: ${casilla.id}`);
-            ficha.remove(); // Eliminar la ficha visual
-        }
-    });
-
-    // Resetear el objeto de apuestas
-    apuestas = {};
-
-    // Actualizar la interfaz con el nuevo balance
-    console.info(balance)
-    actualizarBalance(); // El balance ya refleja el dinero devuelto por las apuestas
-    console.log("Todas las apuestas y fichas han sido eliminadas y el dinero ha sido devuelto al balance.");
 }
 // - ==========================================================================
 
@@ -292,11 +228,6 @@ document.getElementById('wrong').addEventListener('click', function () {
     console.log("Modo borrar activado: haz clic en casillas para eliminar apuestas.");
 });
 
-// * FUNCION PARA QUITAR TODAS LAS APUESTAS
-document.getElementById('erase').addEventListener('click', function () {
-    borrarTodasLasApuestas(); // Llamar a la función que borra todas las apuestas y devuelve el dinero
-});
-
 // & BOTON DEL MENU
 chipsButton.addEventListener('click', () => {
     if (chipsMenu.classList.contains('active')) {
@@ -328,8 +259,7 @@ fichas.forEach(valor => {
     }
 });
 
-// & ================ EVENTOS DE NUMERO UNICOS ===================
-
+// & ================ EVENTOS DE NUMERO UNICOS ==================0
 numberBets.forEach(numberBet => {
     numberBet.addEventListener('click', () => gestionarCasilla(numberBet.textContent.trim()));
 });
@@ -353,5 +283,5 @@ document.getElementById('half-2').addEventListener('click', () => gestionarCasil
 
 // - ================= DECLARACIONES INICALES =======================
 
-balance = balanceInicial; // + Balance inicial
+balance = 5000; // + Balance inicial
 actualizarBalance(); // ? Mostrar el balance inicial

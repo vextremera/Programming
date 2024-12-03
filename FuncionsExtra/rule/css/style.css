@@ -9,6 +9,8 @@ body {
     align-items: center;
     height: 100vh;
     background-color: #f4f4f4;
+    background-image: url('../img/background.jpg');
+    background-size: cover;
 }
 
 .buttons {
@@ -245,4 +247,5 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     transition: transform 0.3s ease; /* Efecto de suavidad al colocar */
+    z-index: 80;
 }
